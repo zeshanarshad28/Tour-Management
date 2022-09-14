@@ -1,0 +1,6 @@
+[
+  { "prop1": "value1", "prop2": "value2" },
+  { "prop3": "value1", "prop4": "value2" },
+  { "prop5": "value1", "prop6": "value2" },
+  { "id": 3, "name": "Zeeshan", "phone": 12345532 }
+]

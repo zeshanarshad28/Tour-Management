@@ -1,0 +1,7 @@
+{
+  "name": "          Faizan Saab        ",
+  "price": 11,
+  "backgroundImage": "myimage",
+  "images": ["abc", "xyz"],
+  "rating": 2
+}

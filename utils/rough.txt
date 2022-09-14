@@ -1,0 +1,46 @@
+// calling the static method for average ratings after new document is added
+reviewsSchema.post("save", function () {
+  // "this" points the current review(document)
+  this.constructor.calcAverageRatings(this.tour);
+});
+
+
+// calling the static method for average ratings in Update/Delete Case . bcz this will be a query middlware
+reviewsSchema.pre(/^findOneAnd/, async function (next) {
+  // "this" points the current query
+  this.currentDocument = await Review.find({}); // getting the current document and storung in "currentDocument" property of "this"(make new property)
+  //console.log(this.currentDocument);
+  next();
+});
+
+
+reviewsSchema.post(/^findOneAnd/, async function () {
+  
+  console.log(this.currentDocument);
+  Review.calcAverageRatings(
+    this.currentDocument.tour 
+  );
+});
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+// calling the static method for average ratings after new document is added
+reviewsSchema.post("save", function () {
+  // "this" points the current review(document)
+  this.constructor.calcAverageRatings(this.tour);
+});
+// calling the static method for average ratings in Update/Delete Case . bcz this will be a query middlware
+reviewsSchema.pre(/^findOneAnd/, async function (next) {
+  // "this" points the current query
+  this.currentDocument = await this.findOne(); // getting the current document and storung in "currentDocument" property of "this"(make new property)
+  // console.log(this.currentDocument);
+  next();
+});
+
+// now use below middlware to change values in db
+reviewsSchema.post(/^findOneAnd/, async function () {
+  // "this" points the current review(document)9
+  // console.log(this.currentDocument);
+  this.currentDocument.constructor.calcAverageRatings(
+    this.currentDocument.tour // here "tour is the name of tour id property in reviews collection"
+  );
+});
