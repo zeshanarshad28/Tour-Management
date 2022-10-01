@@ -266,6 +266,16 @@ exports.getUserAtAll = async (req, res) => {
           as: "filtered Data",
         },
       },
+      {
+        $project: {
+          v: 0,
+          password: 0,
+          "IssuedBooks._id": 0,
+
+          "IssuedBooks.issuedBy": 0,
+          "IssuedBooks.v": 0,
+        },
+      },
     ]);
 
     // console.log(allData[4].newName[0].createdAt);

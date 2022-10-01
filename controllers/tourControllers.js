@@ -17,7 +17,7 @@ const multerFilter = (req, file, cb) => {
   if (file.mimetype.startsWith("image")) {
     cb(null, true);
   } else {
-    cb(new AppErr("not and image! please upload an image file.", 400));
+    cb(new AppError("not and image! please upload an image file.", 400));
   }
 };
 // configuring the multer.
